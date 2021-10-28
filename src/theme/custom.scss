@@ -1,0 +1,24 @@
+:root {
+    :focus{outline:none;}
+    
+    --primary: #0081fb;
+    --primary-lighter: #82c2ff;
+    --available: #00B148;
+    --unavailable: #FF041A;
+    --warning: #f19f06;
+    --standard: #ffd800;
+    --custom: #707070;
+    --white: #ffffff;
+    --dark-gray: #383838;
+    --col-available: #00B148;
+    --col-available-p: #01933c;
+    --col-divier:#bbb;
+    --sign-out: #3880ff;
+    --delete-account: #eb445a;
+
+    @media (prefers-color-scheme: dark) {
+        --col-divier:#333;
+    }
+
+  }
+  

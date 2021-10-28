@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">COMPANY</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="input-text mg-t-16">
+      <ion-input type="text" [(ngModel)]="companyInfo.name"  #input placeholder="Enter your company name">
+      </ion-input>
+    </div>
+    <div class="txt-message mg-t-16">
+      <ion-textarea rows="6" [(ngModel)]="companyInfo.description"  placeholder="Enter company bio" auto-grow="true"></ion-textarea>
+    </div>
+    <div class="input-text mg-t-16">
+      <ion-input type="text" [(ngModel)]="companyInfo.websiteLink"  #input placeholder="Enter your website">
+      </ion-input>
+    </div>
+    <ion-button [disabled]="loading" class="btn-custom mg-t-16" expand="block" (click)="save()">
+      <span *ngIf="!loading">SAVE</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+
+
+  </div>
+</ion-content>

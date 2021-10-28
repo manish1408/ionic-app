@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">HELP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content" *ngIf="loaded">
+
+    <div class="title passive mg-t-16" *ngIf="getByCategory('sell').length > 0">Sell</div>
+    <div class="help-item" *ngFor="let item of getByCategory('sell')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('buy').length > 0">Buy</div>
+    <div class="help-item" *ngFor="let item of getByCategory('buy')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+    
+    <div class="title passive mg-t-32" *ngIf="getByCategory('signal').length > 0">Signal</div>
+    <div class="help-item" *ngFor="let item of getByCategory('signal')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('subscription').length > 0">Subscription</div>
+    <div class="help-item" *ngFor="let item of getByCategory('subscription')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('withdraw').length > 0">Withdraw</div>
+    <div class="help-item" *ngFor="let item of getByCategory('withdraw')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('payment').length > 0">Payment</div>
+    <div class="help-item" *ngFor="let item of getByCategory('payment')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('compliance').length > 0">Compliance</div>
+    <div class="help-item" *ngFor="let item of getByCategory('compliance')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('invite').length > 0">Invite</div>
+    <div class="help-item" *ngFor="let item of getByCategory('invite')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('monitor').length > 0">Monitor</div>
+    <div class="help-item" *ngFor="let item of getByCategory('monitor')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+    <div class="title passive mg-t-32" *ngIf="getByCategory('other').length > 0">Other</div>
+    <div class="help-item" *ngFor="let item of getByCategory('other')">
+      <div class="item" (click)="open(item)">
+        {{item.data.title.iv}}
+      </div>
+    </div>
+
+  </div>
+</ion-content>

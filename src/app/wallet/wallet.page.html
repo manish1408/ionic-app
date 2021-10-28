@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">WALLET</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+
+    <div class="top">
+      <div class="value">${{ balance }}</div>
+      <div class="label passive">credits</div>
+    </div>
+
+    <div class="input-text mg-t-16" *ngIf="withdrawRequested">
+      <ion-input type="text" #input placeholder="Enter amount to withdraw">
+      </ion-input>
+    </div>
+    <div class="input-text mg-t-16" *ngIf="withdrawRequested">
+      <ion-input type="text" #input placeholder="Enter destination ETH address">
+      </ion-input>
+    </div>
+    <ion-button class="btn-custom" expand="block" *ngIf="!withdrawRequested" (click)="requestWithdraw()">
+      <span>WITHDRAW</span>
+    </ion-button>
+    <ion-button class="btn-custom" expand="block" *ngIf="withdrawRequested">
+      <span>CONFIRM</span>
+    </ion-button>
+    <div class="btn-cancel-wrapper mg-b-16" *ngIf="withdrawRequested">
+      <a class="btn-cancel">CANCEL</a>
+    </div>
+
+    <div class="wallet">
+      <div class="title">
+        PAY WITH ETH
+      </div>
+      <div class="description passive">
+        You can pay in by sending ETH to your wallet and it will be converted to $ credits instantly.
+      </div>
+      <div class="value">ETH 0.000000000000 ($0.00)</div>
+      <div class="address-label passive">Your pay-in ETH address</div>
+      <div class="address">0xfd867fa6fa9dea501dd21d84d218b9dfecc29678</div>
+      <div class="action"><a>Copy Address</a></div>
+      <ion-button class="btn-custom" expand="block">
+        <span>CONVERT CREDITS</span>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

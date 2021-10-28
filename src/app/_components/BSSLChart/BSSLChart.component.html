@@ -1,0 +1,18 @@
+<svg-container containerId="svg-element" [height]="35">
+
+  <svg-line [x0]="baselineX0" [y0]="baselineY" [x1]="baselineX1" [y1]="baselineY" [borderSize]="3"
+    borderColor="{{baseline}}"></svg-line>
+
+  <svg-line [x0]="indicatorX0" [y0]="indicatorY" [x1]="indicatorX1" [y1]="indicatorY" [borderSize]="3"
+    borderColor="{{indicatorColor}}"></svg-line>
+
+  <svg-circle [diameter]="levelDiameter" [x]="levelStopLossX" [y]="levelY" color="{{red}}"></svg-circle>
+  <svg-circle [diameter]="levelDiameter" [x]="levelBuyX" [y]="levelY" color="{{white}}"></svg-circle>
+  <svg-circle [diameter]="levelDiameter" [x]="levelSellX" [y]="levelY" color="{{green}}"></svg-circle>
+
+  <svg-image [x]="leftArrowX" [y]="-30" imageUrl="../../assets/chart/left.png" [width]="24" *ngIf="leftArrowEnable">
+  </svg-image>
+  <svg-image [x]="rightArrowX" [y]="-30" imageUrl="../../assets/chart/right.png" [width]="24" *ngIf="rightArrowEnable">
+  </svg-image>
+  
+</svg-container>

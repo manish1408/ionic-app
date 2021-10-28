@@ -1,0 +1,48 @@
+@import '../../theme/generic.scss';
+
+.container {
+    margin: 16px;
+}
+
+.notification-container {
+    float: left;
+    width: 100%;
+    border: solid 1px #aaaaaa80;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.type {
+    font-size: 12px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+.ago {
+    font-size: 11px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    min-width: 100px;
+    text-align: right;
+}
+
+.value {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.main {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.secondary {
+    font-size: 14px;
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,11 @@
+ ion-tab-button{
+    font-size: 11px;
+    --color: #808c9f;
+}
+
+.md ion-tab-button{
+    font-size: 11px;
+    --color: #808c9f;
+    border:solid 1px red !important;
+    text-transform: uppercase !important;
+}

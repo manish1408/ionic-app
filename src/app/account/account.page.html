@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">ACCOUNT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="top">
+      <div class="image-container">
+        <label class="hoverable" for="fileInput" *ngIf="url">
+          <img [src]="url">
+          <div class="background"></div>
+        </label>
+        <br />
+        <input id="fileInput" type='file' (change)="onSelectFile($event)">
+      </div>
+      <div class="instructions passive">TAP ON THE ICON TO UPDATE</div>
+    </div>
+    <div class="input-text">
+      <ion-input type="text" [(ngModel)]="user.username" #input placeholder="Enter your username (Eg. jwick)" disabled>
+      </ion-input>
+    </div>
+    <div class="input-text mg-t-16">
+      <ion-input type="text" [(ngModel)]="user.firstName" #input placeholder="Enter your first name (Eg. John)">
+      </ion-input>
+    </div>
+    <div class="input-text mg-t-16">
+      <ion-input type="text" [(ngModel)]="user.lastName" #input placeholder="Enter your last name (Eg. Wick)">
+      </ion-input>
+    </div>
+    <div class="txt-message mg-t-16">
+      <ion-textarea rows="6" [(ngModel)]="user.bio" placeholder="Enter your bio" auto-grow="true"></ion-textarea>
+    </div>
+    <div class="input-text mg-t-16">
+      <ion-input type="text" [(ngModel)]="user.website" #input placeholder="Enter your website">
+      </ion-input>
+    </div>
+    <ion-button [disabled]="loading" class="btn-custom mg-t-16" expand="block" (click)="save()">
+      <span *ngIf="!loading">SAVE</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+  </div>
+</ion-content>

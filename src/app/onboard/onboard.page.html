@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title mode="ios">GETTING STARTED</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+
+    <div class="title">
+      A bit more from you
+    </div>
+
+    <div class="description passive">
+      Let's get a bit of information from you before you can start getting signals from the best traders around the
+      world.
+    </div>
+
+    <div class="top">
+      <div class="image-container">
+        <label class="hoverable" for="fileInput">
+          <img [src]="url ? url : picturePath">
+          <div class="background"></div>
+        </label>
+        <br />
+        <input id="fileInput" type='file' accept="image/jpeg,image/png" (change)="onSelectFile($event)">
+      </div>
+      <div class="instructions passive">TAP ON THE ICON TO UPDATE</div>
+    </div>
+    <form #f="ngForm" (ngSubmit)="f.valid && confirm()">
+      <div class="content-enabled d-flex flex-column mt-16 mb-10">
+        <div class="value input-text mb-0">
+          <ion-input type="text" name="userName" required #usernameInp="ngModel" [(ngModel)]="model.username"
+            placeholder="Enter your username (Eg. jwick)"></ion-input>
+        </div>
+        <div class="error" *ngIf="f.submitted && usernameInp.errors">
+          <span *ngIf="usernameInp.errors?.required">Username is required.</span>
+          <span *ngIf="usernameInp.errors?.unique">Username is already taken</span>
+        </div>
+      </div>
+
+      <div class="content-enabled d-flex flex-column mb-10">
+        <div class="value input-text mb-0">
+          <ion-input type="text" name="fisrstName" #firstnameInp="ngModel" required [(ngModel)]="model.firstName"
+            placeholder="Enter your first name (Eg. John)">
+          </ion-input>
+        </div>
+        <div class="error" *ngIf="f.submitted && firstnameInp.errors">
+          <span *ngIf="firstnameInp.errors?.required">First name is required.</span>
+        </div>
+      </div>
+
+      <div class="content-enabled d-flex flex-column mb-10">
+        <div class="value input-text mb-0">
+          <ion-input type="text" name="lastName" #lastNameInp="ngModel" [(ngModel)]="model.lastName" required
+            placeholder="Enter your last name (Eg. Wick)">
+          </ion-input>
+        </div>
+        <div class="error" *ngIf="f.submitted && lastNameInp.errors">
+          <span *ngIf="lastNameInp.errors?.required">Last name is required.</span>
+        </div>
+      </div>
+
+      <div class="title mg-t-16">Company</div>
+      <div class="description passive">Details about your company</div>
+      <div class="content-enabled mg-t-8">
+        <div class="enabler-2 mg-t-6">
+          <div class="check">
+            <ion-toggle class="left" slot="start" name="blueberry" [(ngModel)]="enableCompany"></ion-toggle>
+          </div>
+          <div class="label mg-t-2">
+            <ion-label class="left mg-l-8 mg-t-4 tx-w-600">I have company I'm trading with.</ion-label>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="enableCompany">
+        <div class="content-enabled d-flex flex-column mt-16 mb-10">
+          <div class="value input-text mb-0">
+            <ion-input type="text" name="companyName" #companyNameModel="ngModel" clearOnEdit="true"
+              [(ngModel)]="model.companyName" required placeholder="Enter your company name">
+            </ion-input>
+          </div>
+          <div class="error" *ngIf="f.submitted && companyNameModel.errors">
+            <span *ngIf="companyNameModel.errors?.required">Company name is required.</span>
+          </div>
+        </div>
+
+        <div class="content-enabled d-flex flex-column mb-10">
+          <div class="value input-text mb-0">
+            <ion-textarea clearOnEdit="true" name="companyDescription" auto-grow="true"
+              [(ngModel)]="model.companyDescription" placeholder="Enter the company bio">
+            </ion-textarea>
+            <div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ion-button appButtonSpinner type="submit" class="btn-custom" text="CONFIRM" loadingText="Saving"
+        [loadingState]="isSaving" expand="block">
+        <span>CONFIRM</span>
+      </ion-button>
+      <div class="btn-cancel-wrapper">
+        <a class="btn-cancel" (click)="cancel()">CANCEL</a>
+      </div>
+    </form>
+  </div>
+</ion-content>

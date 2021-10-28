@@ -1,0 +1,206 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/signals"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">SELL SIGNAL</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/help']" routerLinkActive="router-link-active">
+        HELP
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="step === 1">
+
+  <div class="visual">
+    <img src="../../assets/visual/broadcast-black.png" *ngIf="!isDark">
+    <img src="../../assets/visual/broadcast-white.png" *ngIf="isDark">
+  </div>
+
+  <div class="title">
+    Sell your signals
+  </div>
+
+  <div class="description passive">
+    Signalled is a completely transparent marketplace. Every signal or subscription you sell, you make 98%.<br>
+  </div>
+
+  <div class="avantages">
+    <a [routerLink]="['/sell-advantages']" routerLinkActive="router-link-active">Here are a few advantages why
+      selling your signals through Signalled.</a>
+  </div>
+
+  <ion-label class="tx-w-600" position="stacked">Enter coin pair</ion-label>
+  <div class="input-text mg-t-4 mg-b-16 input-text">
+    <ion-input type="text" maxlegnth="20" [(ngModel)]="sell.symbol" clearOnEdit="true" placeholder="Eg. ETH/USDT">
+    </ion-input>
+  </div>
+
+  <ion-label class="tx-w-600" position="stacked">Select exchange</ion-label>
+  <div class="mg-t-4 mg-b-16">
+    <ion-item class="selection">
+      <ion-label class="placeholder" *ngIf="!sell.exchange">Eg. Binance</ion-label>
+      <ion-select [(ngModel)]="sell.exchange" interface="action-sheet"
+        [ngClass]="{'selection-selected' : sell.exchange}">
+        <ion-select-option value="Binance">Binance</ion-select-option>
+        <ion-select-option value="Coinbase">Coinbase</ion-select-option>
+        <ion-select-option value="Huobi">Huobi</ion-select-option>
+        <ion-select-option value="Kraken">Kraken</ion-select-option>
+        <ion-select-option value="KuCoin">KuCoin</ion-select-option>
+        <ion-select-option value="Bitstamp">Bitstamp</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div class="input-text mg-t-4 mg-b-16 input-text" *ngIf="false">
+    <ion-input type="text" maxlegnth="20" [(ngModel)]="sell.exchange" clearOnEdit="true" placeholder="Eg. Binance">
+    </ion-input>
+  </div>
+
+  <ion-label class="tx-w-600 green mg-t-16" position="stacked">Enter buy range</ion-label>
+  <div class="input-text mg-t-4 mg-b-16">
+    <ion-input type="text" maxlegnth="50" numeric decimals="16" separator="." [(ngModel)]="buyRange" clearOnEdit="true"
+      placeholder="Eg. 3,5442.00"></ion-input>
+  </div>
+
+  <ion-label class="tx-w-600 red" position="stacked">Enter sell range</ion-label>
+  <div class="input-text mg-t-4 mg-b-16">
+    <ion-input type="text" maxlegnth="50" numeric decimals="16" separator="." [(ngModel)]="sellRange" clearOnEdit="true"
+      placeholder="Eg. 3,800.00"></ion-input>
+  </div>
+
+  <ion-label class="tx-w-600 yellow" position="stacked">Enter stop loss</ion-label>
+  <div class="input-text mg-t-4 mg-b-16">
+    <ion-input type="text" maxlegnth="15" numeric decimals="16" separator="." [(ngModel)]="sell.stopLoss"
+      clearOnEdit="true" placeholder="Eg. 3,450.00"></ion-input>
+  </div>
+
+
+  <ion-label class="tx-w-600" position="stacked">Schedule for</ion-label>
+  <div class="input-text mg-t-4 mg-b-16 date-time">
+    <ion-datetime [(ngModel)]="scheduleAt" value="2020-09-21" placeholder="Select Date"></ion-datetime>
+    <div class="at passive">@</div>
+    <ion-datetime [(ngModel)]="scheduleAt" display-format="h:mm A" picker-format="h:mm A" minuteValues="0,30">
+    </ion-datetime>
+  </div>
+
+  <ion-label class="tx-w-600" position="stacked">Time range <span class="passive" *ngIf="sell.durationInHours">(For
+      {{(sell.durationInHours)}} hours)</span></ion-label>
+  <ion-range class="time-range mg-b-16" [(ngModel)]="sell.durationInHours" (ngModelChange)="selectTime()"
+    color="primary" min="0" max="96" step="4" value="0" snaps>
+  </ion-range>
+
+  <ion-label class="tx-w-600" position="stacked">Upload any documents / charts</ion-label>
+  <div class="upload-container mg-t-4 mg-b-16" (click)="filePicker.click()">
+    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+      <path
+        d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z M 8 12 L 8 18 L 10 18 L 10 12 L 8 12 z M 11 14 L 11 18 L 13 18 L 13 14 L 11 14 z M 14 16 L 14 18 L 16 18 L 16 16 L 14 16 z" />
+    </svg>
+    <div class="label"> {{ files && files.length > 0 ? files.length + ' files selected' : 'Select a file to upload' }}
+    </div>
+  </div>
+
+  <input type="file" hidden class="hidden" multiple
+    accept="image/jpeg,image/gif,image/png,application/pdf,application/xlxs,application/xls"
+    (change)="upload(filePicker.files)" #filePicker>
+  <!-- <input> -->
+  <!-- <ion-input hidden #filePicker type="file" accept="image/*" (change)="changeListener($event)"></ion-input> -->
+
+  <ion-label class="tx-w-600" position="stacked">Enter your comments and other info</ion-label>
+  <div class="input-text mg-b-16 mg-t-4">
+    <ion-textarea clearOnEdit="true" [(ngModel)]="sell.description" auto-grow="true"
+      placeholder="Eg. Describe rationale behind this signal">
+    </ion-textarea>
+  </div>
+
+  <ion-button (click)="validateStep1();" class="btn-custom mg-t-16" expand="block">
+    <span *ngIf="!loading">NEXT</span>
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+  </ion-button>
+
+  <div class="btn-cancel-wrapper">
+    <a class="btn-cancel text-decoration-none" routerLink="/tabs/signals">CANCEL</a>
+  </div>
+
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="step === 2">
+  <div class="mg-b-16">
+    <ion-item class="selection">
+      <ion-label class="tx-w-600">Select single price</ion-label>
+      <ion-select [(ngModel)]="sell.price.value" (ionChange)="onPriceChange($event)" interface="action-sheet">
+        <ion-select-option [value]="0">Free</ion-select-option>
+        <ion-select-option [value]="1.99">$1.99</ion-select-option>
+        <ion-select-option [value]="4.99">$4.99</ion-select-option>
+        <ion-select-option [value]="9.99">$9.99</ion-select-option>
+        <ion-select-option [value]="19.99">$19.99</ion-select-option>
+        <ion-select-option [value]="49.99">$49.99</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div class="mg-b-16 left w-100">
+    <ion-label class="left tx-w-600">Save as default</ion-label>
+    <ion-toggle [disabled]="isDefaultDisabled" class="right" slot="end" name="blueberry" [(ngModel)]="sell.isDefault">
+    </ion-toggle>
+  </div>
+
+
+  <div class="mg-b-16 left w-100">
+    <ion-label class="left tx-w-600">Part of a subsciption</ion-label>
+    <ion-toggle class="right" slot="end" [disabled]="isDefaultDisabled" name="blueberry"
+      [(ngModel)]="sell.isPartOfSubscription"></ion-toggle>
+  </div>
+
+
+  <!-- <div class="mg-b-16 left w-100">
+    <ion-label class="left tx-w-600">Is premium <div class="information op-50 mg-t-4">Only for special customers</div>
+    </ion-label>
+    <ion-toggle class="right" name="blueberry" [disabled]="isDefaultDisabled" [(ngModel)]="sell.isPremium"></ion-toggle>
+  </div> -->
+
+  <ion-button (click)="createSignal()" class="btn-custom mg-t-16 left w-100" expand="block">
+    <span *ngIf="!loading">SELL</span>
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+  </ion-button>
+
+  <div class="left w-100 information op-75 passive">
+    For performance measuring purposes, once the signal is created, you will not be able to change it or deleted until
+    expiration.
+  </div>
+
+  <div class="btn-cancel-wrapper left w-100 mg-t-16">
+    <a class="btn-cancel" (click)="step = 1">CANCEL</a>
+  </div>
+
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="step === 3">
+
+  <div class="ion-text-center w-100  mg-t-64  title">
+    Published successfully
+  </div>
+  <div class="ion-text-center w-100 information mg-t-8 op-75 text-center passive">
+    Your signal has been published successfully
+  </div>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col class="ion-text-center">
+      <ion-icon center class="checkmark-success ion-align-self-center" src="../../assets/functional/icons8-checked.svg">
+      </ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <ion-button (click)="step = 1" class="btn-custom mg-t-16 left w-100" expand="block">
+    <span *ngIf="!loading">Sell another signal</span>
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+  </ion-button>
+
+  <div class="btn-cancel-wrapper left w-100 mg-t-16">
+    <a class="btn-cancel" (click)="sendToSignals()">Go to all signals</a>
+  </div>
+
+</ion-content>

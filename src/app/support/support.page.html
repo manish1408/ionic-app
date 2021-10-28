@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">SUPPORT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+
+    <div class="description passive">
+      We’re here to make life easier, so let us know if you run into any issues.
+    </div>
+
+    <div class="mg-b-16">
+      <ion-item class="selection">
+        <ion-label class="placeholder"*ngIf="!type">Select support type</ion-label>
+        <ion-select interface="action-sheet" [(ngModel)]="type" [ngClass]="{'selection-selected' : type}">
+          <ion-select-option value="Signal">Issues with a signal</ion-select-option>
+          <ion-select-option value="Subscription">Issues with a subscription</ion-select-option>
+          <ion-select-option value="Option 1">Issues with a payment</ion-select-option>
+          <ion-select-option value="Option 1">Issues with a withdrawal</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="txt-message">
+      <ion-textarea rows="6" placeholder="How can we help?" auto-grow="true" [(ngModel)]="value"></ion-textarea>
+    </div>
+
+    <ion-button [disabled]="loading" class="btn-custom" expand="block" (click)="send()">
+      <span *ngIf="!loading">SEND</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+
+
+    <div class="information passive">
+      Once your message is sent, we aim to respond back in the next 24 hours.
+    </div>
+  </div>
+</ion-content>

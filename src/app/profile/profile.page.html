@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/signals"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">{{ profile?.fullName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+
+    <div class="loading" *ngIf="loading">
+      <div class="visual-sm mg-t-32">
+        <img src="../../assets/visual/decision-gray.png">
+      </div>
+      <div class="label">Loading Profile...</div>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <ng-container *ngIf="!loading">
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-text-center">
+          <div class="user-info mg-t-8">
+            <div class="center image" *ngIf="profile?.picture"><img src="{{env.cdn}}profiles/{{ profile?.picture }}">
+            </div>
+            <div class="center fullname">{{ profile?.username }}</div>
+            <div class="center company upper passive" *ngIf="profile?.companyName && profile?.companyId">
+              @{{ profile?.companyName }}</div>
+            <!-- <div class="center company passive" *ngIf="profile?.companyName && profile?.companyId"
+                      [routerLink]="['/company', profile?.companyId]" routerLinkActive="router-link-active">
+                      @{{ profile?.companyName }}</div> -->
+            <div class="center">
+              {{ profile.rating }}
+              <div class="rating" *ngIf="profile?.profileStat && profile.profileStat?.rating > 0">
+                <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" halfStar="true"
+                  activeColor="#488aff" defaultColor="#808c9f" readonly="true" [rating]="profile.profileStat.rating"
+                  fontSize="22px">
+                </ionic-rating-component>
+              </div>
+            </div>
+            <div class="center">
+              <div class="bio">{{ profile?.bio }}</div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="signalPricing?.isPartOfSubscription">
+        <ion-col class="ion-text-center" style="height: 70px;">
+          <div class="value">$3.99</div>
+          <div class="label">AVERAGE COST<br>SINGLE SIGNAL </div>
+        </ion-col>
+        <ion-col class="ion-text-center" style="height: 70px;">
+          <div class="value">$34.99</div>
+          <div class="label">SUBSCRIPTION COST </div>
+        </ion-col>
+        <ion-col class="ion-text-center" style="height: 70px;">
+          <div class="value">40 / day</div>
+          <div class="label">AVERAGE SIGNALS</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!profile?.isOwned">
+        <ng-container *ngIf="signalId; else justSubscriptionSection">
+          <!-- SIGNAL SECTION -->
+          <ng-container *ngIf="signalPricing?.isPartOfSubscription; else justSignalSection">
+            <ion-col size="12" *ngTemplateOutlet="signalSection">
+            </ion-col>
+
+            <!-- SUBSCRIPTION SECTION -->
+            <ion-col *ngTemplateOutlet="subscriptionSection">
+            </ion-col>
+          </ng-container>
+
+          <ng-template #justSignalSection>
+            <ion-col size="12" *ngTemplateOutlet="signalSection">
+            </ion-col>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #justSubscriptionSection>
+          <ion-col *ngTemplateOutlet="subscriptionSection">
+          </ion-col>
+        </ng-template>
+      </ion-row>
+
+      <ion-row class="mg-t-16">
+        <ion-col class="ion-text-center">
+          <div class="value">72%</div>
+          <div class="label">ACCURACY </div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value">147/200</div>
+          <div class="label">SUCCESSFUL SIGNALS </div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value success">Positive</div>
+          <div class="label">SENTIMENT COMMENTS
+          </div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value">9mo</div>
+          <div class="label">JOINED
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="mg-b-16">
+        <canvas #lineCanvas></canvas>
+      </div>
+
+      <div class="comments mg-t-16">
+        <div class="title passive mg-b-8">Comments</div>
+        <div class="txt-message">
+          <ion-textarea rows="2" placeholder="Do you want to leave a comment?" [(ngModel)]="comment.value"
+            auto-grow="true">
+          </ion-textarea>
+        </div>
+        <ion-button class="btn-custom" appButtonSpinner (click)="postComment()" text="COMMENT" loadingText="POSTING..."
+          [loadingState]="isPostingComment" expand="block"></ion-button>
+
+        <div class="comment-container mg-t-4 mg-b-4" *ngFor="let comment of profile?.comments">
+          <div class="comment" [routerLink]="['/profile', comment?.userId]" routerLinkActive="router-link-active">
+            <div class="left">
+              <span class="username">{{ comment?.username }}&nbsp;</span>
+              <span *ngIf="comment?.companyId" class="company passive">@{{ comment?.companyName }}</span>
+            </div>
+            <div class="right">
+              <div class="time-ago passive">{{ comment?.createdOn | timeAgo }}</div>
+            </div>
+            <div class="left value mg-t-8">
+              {{ comment?.value }}
+            </div>
+          </div>
+        </div>
+
+        <div class="empty" *ngIf="empty">
+          <div class="image"><img src="../../assets/visual/comments-gray.png"></div>
+          <div class="label">No comments yet</div>
+          <div class="message">Be the first to leave the first comment</div>
+        </div>
+
+      </div>
+      
+    </ng-container>
+  </div>
+
+</ion-content>
+
+<ng-template #signalSection>
+  <!-- DISPLAY PURCHASE SECTION ONLY IF SIGNAL IS NOT FREE -->
+  <ng-container *ngIf="signalPricing && !signalPricing.isFree">
+    <!-- WHEN SIGNAL HAS NOT BEEN PURCHASED -->
+    <ion-button *ngIf="!signalPricing?.hasPurchased" [disabled]=" isPurchasingSubscription" appButtonSpinner
+      (click)="buySignal()"
+      text="BUY SIGNAL - {{ signalPricing?.signalPrice.value | currency: signalPricing?.signalPrice.currencyCode }}"
+      [loadingState]="isPurchasingSignal" class="btn-custom mg-t-0 left w-100" expand="block">
+    </ion-button>
+
+    <!-- WHEN SIGNAL HAS BEEN PURCHASED -->
+    <ion-button *ngIf="signalPricing?.hasPurchased" disabled class="btn-custom mg-t-0 left w-100">
+      PURCHASED
+    </ion-button>
+    
+  </ng-container>
+</ng-template>
+
+<ng-template #subscriptionSection>
+  <div class="or passive" *ngIf="signalId && profile?.subscriptionId">OR</div>
+  <ng-container *ngIf="!profile?.hasSubscribed && profile?.subscriptionId; else unSubscribedSection">
+    <ion-button [disabled]="isPurchasingSignal" appButtonSpinner (click)="buySubscription()"
+      text="SUBSCRIBE - {{ profile?.subscriptionPrice.value | currency: profile?.subscriptionPrice.currencyCode }}/mo"
+      [loadingState]="isPurchasingSubscription" class="btn-custom mg-t-8 left w-100" expand="block">
+      <span>
+      </span>
+    </ion-button>
+  </ng-container>
+
+  <ng-template #unSubscribedSection>
+    <ion-button *ngIf="profile?.subscriptionId" appButtonSpinner (click)="unsubscribe()"
+      class="btn-custom mg-t-8 left w-100" [loadingState]="isPurchasingSubscription" expand="block">
+      UNSUBSCRIBE
+    </ion-button>
+  </ng-template>
+
+  <div class="disclaimer passive" *ngIf="!profile?.hasSubscribed">
+    By subscribing, you accept the terms of service and you will be
+    billed for 1 month worth of signals. {{ profile?.companyName }} owns the signals and
+    98% of the profits of this subscriptions goes to the account owner.
+  </div>
+</ng-template>

@@ -1,0 +1,30 @@
+@import '../../theme/generic.scss';.container{margin:16px;}
+.search{margin-bottom:16px;}
+.search ion-input{font-size:14px;}
+.selectors ion-badge{margin:0 6px 6px 0;font-size:12px;padding:8px;}
+.signal-container{float:left;width:100%;border:solid 1px #aaaaaa80;padding:6px 12px;border-radius:8px;margin-top:16px;}
+.user-info{float:left;width:100%;cursor:pointer;}
+.user-info .username{font-size:14px;font-weight:600;cursor:pointer;}
+.user-info .company{font-size:12px;margin-top: 4px;text-transform:uppercase;cursor:pointer;}
+.user-info .stats{font-size:12px;margin-top:4px;text-transform:uppercase;cursor:pointer;}
+.user-info .rating img{width:20px;cursor:pointer;}
+.user-info .profile-image {margin-right: 4px; margin-top: 3px; margin-bottom: 1px;}
+.user-info .profile-image img {height: 32px; width: 32px; border-radius: 24px;}
+
+:host::ng-deep .rate-button{margin:0 1px;float:left;}
+.symbol-info{float:left;width:100%;margin-top:16px;}
+.symbol-info .symbol{font-weight:600;font-size:16px;}
+.symbol-info .exchange{text-transform:uppercase;font-size:12px;font-weight:500;}
+.symbol-info .percentage{font-weight:600;font-size:16px;text-align:right;}
+.symbol-info .percentage-label{text-transform:uppercase;font-size:12px;font-weight:500;text-align:right;}
+.payment{float:left;width:100%;padding-top:8px;cursor:pointer;}
+.payment .subscription{float:left;background-color:#0081fb;color:#ffffff;text-transform:uppercase;font-size:12px;padding:2px 8px;border-radius:8px;font-weight:600;margin-top:6px;}
+.payment .subscription img{width:16px;}
+.payment .subscription div{float:left;margin:4px 2px 0 2px;}
+.general-stats{float:left;width:100%;padding-top:16px;cursor:pointer;}
+.general-stats .shared{text-transform:uppercase;font-size:12px;}
+.general-stats .ago{font-size:12px;text-align:right;}
+.general-stats .progress{float:left;width:100%;margin-top:8px;}
+.general-stats .stats{text-transform:uppercase;font-size:12px;margin-top:8px;}
+.subscription-list{display:flex;flex-direction:column;}
+.subscription-section{margin-bottom:10px;}

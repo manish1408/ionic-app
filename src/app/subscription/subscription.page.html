@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/subscriptions"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">SUBSCRIPTION</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-text-center">
+        <div class="user-info-top mg-t-8">
+          <div class="center username">{{ subscription?.ownerName }}</div>
+          <div class=" center company passive">@{{ subscription?.companyName }}</div>
+        </div>
+        <!-- 
+         <div class="user-info-top mg-t-8" [routerLink]="['/company', subscription?.companyId]"
+           routerLinkActive="router-link-active">
+           <div class="center username">{{ subscription?.ownerName }}</div>
+           <div class=" center company passive">@{{ subscription?.companyName }}</div>
+         </div> -->
+      </ion-col>
+    </ion-row>
+
+    <div class="input-text search mg-t-4">
+      <ion-input type="text" (keyup.enter)="refresh()" [(ngModel)]="search" placeholder="Search (Eg. ETH/USDT)">
+      </ion-input>
+    </div>
+
+    <div class="selectors">
+      <ion-badge (click)="applyTag(tag.value)" *ngFor="let tag of filterTags"
+        [color]="appliedTags.indexOf(tag.value) > -1 ? tag.value === 2 ? 'warning' : 'primary' : 'medium'">
+        {{ tag.name }}</ion-badge>
+    </div>
+
+    <div class="loading" *ngIf="loading">
+      <div class="visual-sm mg-t-32">
+        <img src="../../assets/visual/process-gray.png">
+      </div>
+      <div class="label">Loading Signals...</div>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <app-signal-list *ngIf="!loading" [signals]="signals"></app-signal-list>
+  </div>
+</ion-content>

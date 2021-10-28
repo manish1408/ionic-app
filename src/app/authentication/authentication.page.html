@@ -1,0 +1,47 @@
+<ion-content>
+  <div class="logo">
+    <img src="../../assets/logo/logo.png" class="logo">
+  </div>
+  <div class="intro">
+    <div class="main">The signal marketplace</div>
+    <div class="secondary">No more guessing for your next trade.</div>
+  </div>
+  <div class="sign-in">
+    <ion-segment mode="ios" [(ngModel)]="mode" (ionChange)="switchMode($event)" *ngIf="!confirmMode">
+      <ion-segment-button value="email" checked>
+        <ion-label>Email</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="mobile">
+        <ion-label>Mobile</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="input-text">
+      <ion-input type="email" inputmode="email" autofocus="true" autocorrect="false" autocomplete="off" #input placeholder="Enter your email address" *ngIf="mode=='email' && confirmMode == false" [(ngModel)]="value">
+      </ion-input>
+      <ion-input type="tel" inputmode="tel" placeholder="Enter your mobile number" *ngIf="mode=='mobile' && confirmMode == false" [(ngModel)]="value">
+      </ion-input>
+      <ion-input type="password" inputmode="numeric" placeholder="Enter the confirmation code" maxlength="6" *ngIf="confirmMode == true" [(ngModel)]="code" (ionChange)="confirmationChange()">
+      </ion-input>
+    </div>
+
+    <ion-button class="btn-custom" expand="block" (click)="continue()" *ngIf="confirmMode == false" [disabled]="loading">
+      <span *ngIf="!loading">CONTINUE</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+    <ion-button class="btn-custom" expand="block" (click)="confirm()" *ngIf="confirmMode == true" [disabled]="loading">
+      <span *ngIf="!loading">CONFIRM</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+
+    <div class="btn-cancel-wrapper">
+      <a class="btn-cancel" (click)="cancel()" *ngIf="confirmMode == true">CANCEL</a>
+    </div>
+
+    <div class="terms" *ngIf="confirmMode == false">
+      By pressing continue, you agree to Signalled's<br>
+      <a routerLink="/terms">Terms of Service</a> and <a routerLink="/privacy">Privacy Policy</a>
+    </div>
+  </div>
+
+</ion-content>

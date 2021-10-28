@@ -1,0 +1,43 @@
+ion-item,ion-label{font-size:14px;}
+ion-item{padding:0;--border-width:0;--inner-border-width:0;--padding-start:16px;border-radius:8px;;padding:8px;}
+::ng-deep .action-sheet-button.sc-ion-action-sheet-ios{font-size:16px;}
+ion-datetime{padding-left:0;padding-right:0;}
+.date-time{display:flex;justify-content:left;}
+.date-time .at{margin:10px 6px 0 6px;}
+.content{padding:16px !important;}
+.txt-message{width:100%;margin:0 0 16px 0;font-weight:500;background-color:#eeeeee;padding:0 16px;border-radius:8px;font-size:14px;}
+.input-text{background-color:#eeeeee;padding:2px 16px;border-radius:8px;margin-bottom:16px;width:100%;font-size:14px;}
+.input-text ion-input{background-color:#eeeeee;}
+.selection{--ion-item-background:#eeeeee;}
+.btn-custom{margin:16px 0px;}
+.description{margin-bottom:16px;font-weight:600;}
+.information{font-size:11px;text-transform:uppercase;text-align:left;font-weight:700;}
+.title{font-weight:600;font-size:16px;text-align:center;text-transform:uppercase;}
+.description{text-align:center;font-size:12px;margin:8px 0 8px 0;}
+.selection{padding:0px !important;}
+.selection-selected{width:100%;max-width:100%;padding-left:0;}
+.placeholder{color:#777777;}
+.loading{text-align:center;margin-top:64px;}
+.loading .label{text-transform:uppercase;font-size:12px;margin-bottom:8px;color:#808c9f;font-weight:600;}
+.loading ion-spinner{--color:#808c9f;}
+.empty{text-align:center;float:left;width:100%;padding:32px 0;}
+.empty .label{text-transform:uppercase;font-size:12px;margin-bottom:8px;color:#808c9f;font-weight:600;margin-top:8px;}
+.empty .message{text-transform:uppercase;font-size:12px;margin-bottom:8px;color:#808c9f;}
+.empty img{max-width:60px;}
+.comment .username{font-size:14px;font-weight:600;}
+.comment .company{font-size:12px;}
+.comment .stats{font-size:12px;margin-top:4px;text-transform:uppercase;}
+.comment .value{font-size:12px;margin-top:4px;font-weight:500;}
+.visual{text-align:center;}
+.visual img{max-width:80px;}
+.visual-sm{text-align:center;}
+.visual-sm img{max-width:80px;}
+.pointer {cursor: pointer;}
+
+@media (prefers-color-scheme: dark)  {
+    .selection {--ion-item-background:#2b333d;}
+    .placeholder {color:#95999e;}
+    .txt-message{width:100%;margin:0 0 16px 0;font-weight:500;background-color:#2b333d;padding:4px 16px;border-radius:8px; font-size: 14px;}
+    .input-text {background-color:#2b333d; padding: 2px 16px;border-radius: 8px; margin-bottom: 16px; width: 100%;font-size: 14px;}
+    .input-text ion-input { background-color:#2b333d; }
+}

@@ -1,0 +1,17 @@
+@import '../../theme/generic.scss';
+
+.top{margin-bottom:16px;}
+.top .image-container{width:60px;height:60px;margin:0 auto;clear:both;}
+.top .image-container{margin:0 auto;clear:both;}
+.top .image-container img{width:60px;height:60px;border-radius:50px;}
+.top .instructions{text-align:center;margin:4px 0 0 0;font-size:11px;font-weight:800;}
+.top img{height:100%;width:100%;border-radius:50%;}
+.top #fileInput{display:none;}
+
+.title { font-size: 18px; text-align: center; margin-left: 0px; font-weight: 900; text-transform: uppercase;}
+.description { text-align: center;}
+.creative {text-align: center; margin-bottom: 16px;}
+.creative img {width: 100px;}
+.content-enabled {display: flex;}
+.content-enabled .enabler {min-width: 200px;}
+.content-enabled .enabler-2 {min-width: 100%;}

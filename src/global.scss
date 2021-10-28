@@ -1,0 +1,152 @@
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+ion-header ion-toolbar ion-title{font-size:14px; text-transform: uppercase;}
+ion-header ion-toolbar ion-buttons ion-button{font-size:14px !important;font-weight:600 !important;}
+ion-back-button{font-weight:700;font-size:14px;text-transform:uppercase;outline:none;}
+ion-textarea{background-color:#1c1c1f;font-weight:500;font-size:14px;}
+.badge{position:absolute;top:0px;right:-5px;font-size:0.6em;--padding-start:5px;--padding-end:5px;}
+.main-title{font-size:32px;text-align:center;margin:16px 0;font-weight:900;}
+.secondary-title{font-size:24px;text-align:center;margin:16px 0;font-weight:900;}
+.custom-toast{font-weight:700;font-size:13px;text-align:center;text-transform:uppercase;}
+.toast-message{font-weight:700 !important;}
+.btn-cancel-wrapper{text-align:center;margin-top:16px;}
+.btn-cancel{font-weight:700;font-size:14px;font-size:14px;font-weight:800px;}
+.btn-custom{font-weight:700;font-size:14px;}
+.btn-upload{font-weight:700;font-size:13px;text-align:center;text-transform:uppercase;}
+.btn-secondary{font-weight:700;font-size:14px;color:var(--primary)}
+.popover{--background:#222;--width:80%;}
+.upload-container{background-color:#808c9f20;text-align:center;border-radius:8px;min-height:100px;padding:16px;}
+.upload-container{padding-top:24px;}
+.upload-container .label{font-size:14px;font-weight:500;color:#777777;}
+.upload-icon{fill:#2b323c;;}
+.divider{border:solid 1px #808c9f50;width:100%;}
+.red{color:#f6465d;}
+.green{color:#2ebd85;}
+.yellow{color:#f1b90c;}
+.passive{color:#808c9f;}
+.blue{color:#0081fb;}
+.left{float:left;}
+.right{float:right;}
+.clearl{clear:left;}
+.clearr{clear:right;}
+.clearb{clear:both;}
+.op-25{opacity:0.25;}
+.op-50{opacity:0.50;}
+.op-75{opacity:0.75;}
+.tx-w-300{font-weight:300 !important;}
+.tx-w-500{font-weight:500 !important;}
+.tx-w-600{font-weight:600 !important;}
+.tx-w-700{font-weight:700 !important;}
+.w-100{width:100%;}
+.w-50{width:50%;}
+.error{font-size:12px;margin-top:5px;font-weight:500;color:#eb445a;}
+.text-decoration-none{text-decoration:none;}
+.d-flex{display:flex;}
+.flex-column{flex-direction:column;}
+.upper {text-transform: uppercase;}
+
+
+@for $x from 1 to 100 {
+    .mg-t-#{$x} {margin-top:0px + $x !important;}
+    .mg-b-#{$x} {margin-bottom:0px + $x !important;}
+    .mg-x-#{$x} {margin:0px + $x 0px + $x !important;}
+    .mg-r-#{$x} {margin-right:0px + $x !important;}
+    .mg-l-#{$x} {margin-left:0px + $x !important;}
+    .tx-#{$x} {font-size:0px + $x !important;}
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-header ion-toolbar ion-buttons ion-button ion-icon{color:var(--white);}
+    ion-header ion-toolbar ion-buttons ion-button{font-size:14px !important;font-weight:600 !important;}
+    ion-back-button{color:var(--white) !important;font-weight:700;font-size:14px;text-transform:uppercase;outline:none;}
+    ion-textarea{background-color:#1c1c1f;font-weight:500;font-size:14px !important;}
+    
+    .upload-container{background-color:#808c9f20;text-align:center;border-radius:8px;min-height: 80px;padding:16px;}
+    .upload-container .label{font-size:14px;font-weight:500;color:#ffffff;}
+    .upload-icon{fill:#ffffff;}
+    
+    .datetime{background-color:transparent;color:var(--white);border:solid 2px var(--white);}
+    .passive{color:#a2b1c8;}
+
+}
+
+
+
+@for $x from 0 to 100 {
+    .mt-#{$x} {
+        margin-top: $x+px !important;
+    }
+
+    .ml-#{$x} {
+        margin-left: $x+px !important;
+    }
+
+    .mr-#{$x} {
+        margin-right: $x+px !important;
+    }
+
+    .mb-#{$x} {
+        margin-bottom: $x+px !important;
+    }
+
+    .mx-#{$x} {
+        margin: 0px $x+px 0px $x+px !important;
+    }
+
+    .my-#{$x} {
+        margin: $x+px 0px $x+px 0px !important;
+    }
+
+    .pt-#{$x} {
+        padding-top: $x+px !important;
+    }
+
+    .pl-#{$x} {
+        padding-left: $x+px !important;
+    }
+
+    .pr-#{$x} {
+        padding-right: $x+px !important;
+    }
+
+    .pb-#{$x} {
+        padding-bottom: $x+px !important;
+    }
+
+    .px-#{$x} {
+        padding: 0px $x+px 0px $x+px !important;
+    }
+
+    .my-#{$x} {
+        padding: $x+px 0px $x+px 0px !important;
+    }
+
+    .tx-#{$x} {
+        font-size: $x+px !important;
+    }
+}
+
+.user-image-ctrl {
+    ion-icon.md.hydrated {
+        font-size: 35px !important;
+    }
+}
+.user-doc-ctrl {
+    ion-icon.md.hydrated {
+        font-size: 35px !important;
+    }
+}

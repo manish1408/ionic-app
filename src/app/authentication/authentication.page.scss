@@ -1,0 +1,20 @@
+@import '../../theme/generic.scss';
+
+.peek{text-align:center;margin-top:16px;}
+.peek ion-icon{width:40px;height:40px;}
+.logo{text-align:center;margin-top:32px;}
+.logo img{width:90px; border-radius: 8px;}
+.intro{margin:0px 0 0 0;text-align:center;}
+.intro .main{font-size:26px;font-weight:800;}
+.intro .secondary{font-size:15px;margin:8px 32px 0 32px; opacity: 0.6;font-weight:600;}
+.sign-in{padding:16px;}
+.terms{margin:16px 0 0 0;font-size:12px;text-align:center;font-weight:500;}
+.terms a{font-weight:500;text-decoration:none;}
+.version {text-align: center; font-size: 12px; opacity: 0.5;}
+
+.input-text {text-align: center;}
+
+ion-segment{margin:16px auto;max-width:240px;}
+ion-segment .sc-ion-label-ios-h{font-size:14px;font-weight:700; }
+ion-footer { height: 60px; padding: 16px;display:flex;justify-content:center;}
+ion-footer a {margin: 0 8px; font-weight: 600; font-size: 14px; text-decoration: none;}

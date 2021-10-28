@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>acknowledge</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <p>Signalled and the traders registered on the platform do not accept any
+      liability for any loss or damage which is incurred from you
+      acting or not acting as a result of reading any of the publications wether from Signalled or by the traders.</p>
+
+    <p>You acknowledge that you use the information we provide at your own risk.</p>
+
+    <p>Signalled or any trader publishing signals,
+      does not offer investment advice and nothing in the calls the traders make should be construed as
+      investment advice.</p>
+
+    <p>Signalled or any trader publishing signals
+      provides information and education based on their own trades.</p>
+
+    <p>You are paying to follow trades that the traders publish for educational purposes.</p>
+
+    <div class="toggle">
+      <ion-toggle slot="start" name="blueberry" [(ngModel)]="acknowledged"></ion-toggle>
+      <div class="value">I have read, understood and accept the statements above.</div>
+    </div>
+
+    <ion-button class="btn-custom" expand="block" [disabled]="!acknowledged" (click)="submitAcknowledgement()">
+      CONFIRM
+    </ion-button>
+
+  </div>
+</ion-content>

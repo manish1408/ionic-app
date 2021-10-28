@@ -1,0 +1,12 @@
+@import '../../theme/generic.scss';
+.container{margin:16px;}
+ion-toolbar ion-title img{width:40px;margin-top:4px;}
+ion-slide img{width:100%;border-radius:8px;}
+.swiper-slide{display:block;}
+.swiper-slide h2{margin-top:16px;font-weight:600;}
+.swiper-slide img{pointer-events:none;}
+.stats{display:flex;width:100%;}
+.stats .stat{text-align:center;width:100%;}
+.stats .stat .value{font-weight:600;font-size:22px;font-family:'RobotoMono';}
+.stats .stat .label{font-weight:500;font-size:11px;text-transform:uppercase;}
+.text-danger{color:red}

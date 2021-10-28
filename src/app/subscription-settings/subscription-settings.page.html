@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">SUBSCRIPTION</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+
+    <div class="description passive">
+      Before you start selling signals, we need to ask you a few questions. Enable the weekly and monthly subscription?
+    </div>
+
+    <!-- <div class="content-enabled mg-t-16">
+      <div class="enabler mg-t-6">
+        <div class="check">
+          <ion-toggle class="left" slot="start" name="blueberry" [(ngModel)]="enableWeeklyPrice"></ion-toggle>
+        </div>
+        <div class="label mg-t-2">
+          <ion-label class="left mg-l-8 mg-t-4 tx-w-600">Weekly Price</ion-label>
+        </div>
+      </div>
+      <div class="value input-text">
+        <ion-input type="text" numeric decimals="2" separator="." clearOnEdit="true" placeholder="$19.99"
+          [(ngModel)]="weeklyPrice" [disabled]="!enableWeeklyPrice"></ion-input>
+      </div>
+    </div> -->
+
+    <div class="content-enabled mg-t-8">
+      <div class="enabler mg-t-6">
+        <div class="check">
+          <ion-toggle class="left" slot="start" name="blueberry" [(ngModel)]="enableMonthlyPrice"></ion-toggle>
+        </div>
+        <div class="label mg-t-2">
+          <ion-label class="left mg-l-8 mg-t-4 tx-w-600">Monthly Price</ion-label>
+        </div>
+      </div>
+      <div class="value input-text">
+        <ion-input type="text" numeric decimals="2" separator="." placeholder="$59.99" maxlength="8"
+          [(ngModel)]="monthlyPrice" [disabled]="!enableMonthlyPrice">
+        </ion-input>
+      </div>
+    </div>
+
+    <ion-button [disabled]="isSaving" class="btn-custom mg-t-16" expand="block" (click)="save()">
+      <span *ngIf="!isSaving">SAVE</span>
+      <ion-spinner name="crescent" *ngIf="isSaving"></ion-spinner>
+    </ion-button>
+
+  </div>
+</ion-content>

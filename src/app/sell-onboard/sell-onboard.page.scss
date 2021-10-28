@@ -1,0 +1,34 @@
+@import '../../theme/generic.scss';
+
+.title {
+    font-size: 18px;
+    text-align: center;
+    margin-left: 0px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.description {
+    text-align: center;
+}
+
+.creative {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.creative img {
+    width: 100px;
+}
+
+.content-enabled {
+    display: flex;
+}
+
+.content-enabled .enabler {
+    min-width: 200px;
+}
+
+.content-enabled .enabler-2 {
+    min-width: 100%;
+}

@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/help']" routerLinkActive="router-link-active">
+        HELP
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="ios">SUBSCRIPTIONS</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/subscription-settings">
+        SETTINGS
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doPullRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="crescent" refreshingText="">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="container">
+
+    <div class="input-text search">
+      <ion-input type="text" [(ngModel)]="search" (keyup.enter)="refresh()"
+        placeholder="Search (Eg. Username or Company)">
+      </ion-input>
+    </div>
+
+    <div class="selectors">
+      <ion-badge (click)="applyTag(tag.value)" *ngFor="let tag of filterTags"
+        [color]="appliedTags.indexOf(tag.value) > -1 ? 'primary' : 'medium'">
+        {{ tag.name }}</ion-badge>
+    </div>
+
+
+    <div class="loading" *ngIf="loading">
+      <div class="visual-sm mg-t-32">
+        <img src="../../assets/visual/process-gray.png">
+      </div>
+      <div class="label">Loading Subscriptions...</div>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <ng-container *ngIf="!loading">
+      <div class="subscription-list">
+        <div class="subscription-section">
+          <div class="signal-container" *ngFor="let subscription of subscriptions">
+            <div class="user-info" [routerLink]="['/subscription', subscription?.id]"
+              routerLinkActive="router-link-active">
+              <div class="left">
+                <div class="username">{{subscription.ownerName}}</div>
+                <div class="company passive">{{ subscription.companyName }}</div>
+                <div class="stats passive">
+                  Success rate:
+                  {{ subscription?.subscriptionStats?.totalSuccesses }}/{{ subscription?.subscriptionStats?.totalSignals }}
+                </div>
+              </div>
+              <div class="right" style="text-align: right;">
+                <div class="profile-image"><img src="{{env.cdn}}profiles/{{ subscription.ownerPicture }}"></div>
+                <div class="rating">
+                  <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" activeColor="#488aff"
+                    defaultColor="#808c9f" readonly="true" halfRating="true"
+                    [rating]="subscription.subscriptionStats?.rating > 0 ? subscription.subscriptionStats?.rating : -1"
+                    fontSize="16px">
+                  </ionic-rating-component>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment" [routerLink]="['/subscription', subscription?.id]">
+              <div class="left">
+                <div class="subscription">
+                  <div><img src="../../assets/functional/icons8-lock.svg"></div>
+                  <ng-container *ngIf="!subscription?.isOwned; else ownedSection">
+                    <ng-container *ngIf="!subscription?.prices; else pricing">
+                      <div>FREE</div>
+                    </ng-container>
+                    <ng-template #pricing>
+                      <ng-container *ngIf="subscription?.hasPurchased;else subscriptionPrice;">
+                        <div>Purchased</div>
+                      </ng-container>
+                      <ng-template #subscriptionPrice>
+                        <ng-container *ngIf="subscription.prices">
+                          <div>
+                            SUBSCRIBE
+                            <span>
+                              {{ getSubscriptionPrice(subscription) }}
+                            </span>
+
+                          </div>
+                        </ng-container>
+                      </ng-template>
+                    </ng-template>
+
+                  </ng-container>
+
+                  <ng-template #ownedSection>
+                    <div>OWNED</div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+            <div class="general-stats" [routerLink]="['/subscription', subscription?.id]">
+              <div class="left shared passive">
+                <span *ngIf="subscription?.subscriptionStats?.averageSignalsPerDay > 0">
+                  AVG SIGNALS {{ subscription?.subscriptionStats?.averageSignalsPerDay}}/day |</span>
+                {{ subscription?.subscriptionStats?.totalSignals }} SIGNALS TO
+                DATE</div>
+            </div>
+
+          </div>
+
+          <div class="empty" *ngIf="subscriptions.length < 1">
+            <div class="image"><img src="../../assets/visual/empty-gray.png"></div>
+            <div class="label">No subscriptions yet</div>
+            <div class="message">Try a different search criteria</div>
+          </div>
+        </div>
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+          <ion-infinite-scroll-content loadingSpinner="crescent">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+
+    </ng-container>
+  </div>
+
+
+</ion-content>

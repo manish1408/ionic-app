@@ -1,0 +1,13 @@
+@import '../../theme/generic.scss';
+
+.top{margin-bottom:16px;}
+.top .image-container{width:60px;height:60px;margin:0 auto;clear:both; cursor: pointer;}
+.top .image-container{margin:0 auto;clear:both;cursor: pointer;}
+.top .image-container img{width:60px;height:60px;border-radius:50px;cursor: pointer;}
+.top .instructions{text-align:center;margin:4px 0 0 0;font-size:11px;font-weight:800; cursor: pointer;}
+.top img{height:100%;width:100%;border-radius:50%;object-fit:cover;cursor: pointer;}
+.top #fileInput{display:none;}
+
+.image-container{background-color:#fff;border-radius:50%;}
+    @media (prefers-color-scheme:dark){.image-container{background-color:#2b333d;border-radius:50%;}
+}

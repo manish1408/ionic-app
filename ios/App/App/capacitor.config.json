@@ -1,0 +1,6 @@
+{
+	"appId": "co.signalled",
+	"appName": "Signalled",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,26 @@
+@import '../../theme/generic.scss';ion-item,ion-label{font-size:14px;}
+ion-item{padding:0;--border-width:0;--inner-border-width:0;--padding-start:8px;border:solid 1px #aaaaaa80;border-radius:8px;;padding:8px;}
+.creative{text-align:center;margin-bottom:16px;}
+.creative img{width:100px;}
+.title{font-weight:600;text-align:center;text-transform:uppercase;}
+.disclaimer{text-align:center;font-size:11px;margin:0 0 8px 0;}
+.value{font-weight:600;font-size:18px;}
+.label{text-align:center;font-size:10px;margin:4px 0 16px 0;color:#808c9f;}
+.time-range{padding:0px 10px 0px 10px;}
+.information{font-size:11px;text-align:center;}
+.signal-container{padding:5px 0px;display:inline-block;}
+.user-info{float:left;width:100%;}
+.user-info .image img{width:64px;height:64px;border-radius:32px;}
+.user-info .fullname{float:left;width:100%;font-size:24px;font-weight:600;}
+.user-info .username{float:left;width:100%;font-size:14px;font-weight:600;}
+.user-info .company{float:left;width:100%;font-size:14px;font-weight:600;padding:4px 0 4px 0;}
+.user-info .stats{float:left;width:100%;font-size:12px;margin-top:4px;text-transform:uppercase;}
+.user-info .bio{text-align:center;font-size:14px;margin:16px 0 16px 0;}
+.success{color:green;}
+.or{float:left;width:100%;font-weight:600;text-align:center;}
+.advantages{font-size:12px;font-weight:600;}
+.comments{float:left;width:100%;}
+.comment-container{float:left;width:100%;border:solid 1px #aaaaaa80;padding:6px 12px;border-radius:8px;margin-top:16px;}
+.comment-container .value{font-size:12px;float:left;clear:both;width:100%;}
+.comment-container .time-ago{font-size:12px;}
+.btn-custom{margin:8px 0 !important;}

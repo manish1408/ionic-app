@@ -1,0 +1,37 @@
+@import '../../../theme/generic.scss';
+
+.container{margin:16px;}
+.search{margin-bottom:16px;}
+.search ion-input{font-size:14px;}
+.selectors ion-badge{margin:0 6px 6px 0;font-size:12px;padding:8px;}
+.btn-purchase{font-weight:700;font-size:14px;text-transform:uppercase;}
+.signal-container{float:left;width:100%;border:solid 1px #aaaaaa80;padding:6px 12px;border-radius:8px;margin-top:16px;}
+.signal-container-expired{opacity:0.4;}
+.user-info{float:left;width:100%;cursor:pointer;}
+.user-info .username{font-size:14px;font-weight:600;}
+.user-info .company{font-size:12px;margin-top: 4px;text-transform:uppercase;}
+.user-info .stats{font-size:12px;margin-top: 4px;text-transform:uppercase;}
+.user-info .profile-image {margin-right: 4px; margin-top: 3px; margin-bottom: 1px;}
+.user-info .profile-image img {height: 32px; width: 32px; border-radius: 24px;}
+:host::ng-deep .rate-button{margin:0 1px;float:left;}
+
+.selected{width:14px;height:14px;background-color:#f1b90c;border-radius:50%;margin:12px 0 0 0;}
+
+.symbol-info{float:left;width:100%;margin-top:16px;cursor:pointer;}
+.symbol-info .symbol{font-weight:600;font-size:16px;}
+.symbol-info .exchange{text-transform:uppercase;font-size:12px;font-weight:500;}
+.symbol-info .percentage{font-weight:700;font-size:16px;text-align:right;}
+.symbol-info .percentage-label{text-transform:uppercase;font-size:12px;font-weight:500;text-align:right;}
+.payment{float:left;width:100%;padding-top:8px;cursor:pointer;}
+.payment .subscription{float:left;background-color:#0081fb;color:#ffffff;text-transform:uppercase;font-size:12px;padding:2px 8px;border-radius:8px;font-weight:600;margin-top:6px;}
+.payment .subscription img{width:16px;}
+.payment .subscription div{float:left;margin:4px 2px 0 2px;}
+.general-stats{float:left;width:100%;padding-top:16px;cursor:pointer;}
+.general-stats .shared{text-transform:uppercase;font-size:12px;}
+
+.general-stats .ago{font-size:12px;text-align:right; display: flex; justify-content: right;}
+.general-stats .ago img{height: 14px; width: 14px; padding-top: 2px;}
+
+.general-stats .progress{float:left;width:100%;margin-top:8px;}
+.general-stats .stats{text-transform:uppercase;font-size:12px;margin-top:8px;}
+.status .expired{color:#f1b90c;font-size:12px;text-transform:uppercase;margin-top:14px;}

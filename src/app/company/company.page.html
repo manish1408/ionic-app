@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/signals"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">COMPANY</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="container">
+
+    <div class="loading" *ngIf="loading">
+      <div class="visual-sm mg-t-32">
+        <img src="../../assets/visual/decision-gray.png">
+      </div>
+      <div class="label">Loading Company...</div>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <ng-container *ngIf="!loading">
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-text-center">
+          <div class="user-info" routerLinkActive="router-link-active">
+            <div class="center">
+              <span class="company-name">{{ profile?.name }}</span>&nbsp;
+            </div>
+            <div class="center mg-t-8">
+              <div class="rating">
+                <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" activeColor="#488aff"
+                  defaultColor="#808c9f" readonly="true" halfStar="true" [rating]="profile?.profileStat?.rating"
+                  fontSize="22px">
+                </ionic-rating-component>
+              </div>
+            </div>
+            <div class="bio">
+              {{ profile?.bio }}
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <div class="value">{{ profile?.profileStat?.accuracy }}%</div>
+          <div class="label">ACCURACY</div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value">{{ profile?.profileStat?.successfulSignals }}/{{ profile?.profileStat?.totalSignals }}
+          </div>
+          <div class="label">SUCCESSFUL SIGNALS</div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value success">{{ profile?.profileStat?.sentimentComments }}</div>
+          <div class="label">SENTIMENT COMMENTS</div>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <div class="value">9mo</div>
+          <div class="label">JOINED</div>
+        </ion-col>
+      </ion-row>
+
+      <ng-container *ngIf="!profile.isOwned">
+        <ion-row *ngIf="!profile.hasPurchasedSubscription">
+          <ion-col size="12">
+            <ion-button class="btn-custom left w-100" expand="block">
+              <ion-button appButtonSpinner (click)="buySubscription()"
+                text="SUBSCRIBE - {{ profile?.subscriptionPrice?.value | currency: profile?.subscriptionPrice?.currencyCode }}/mo"
+                [loadingState]="isPurchasingSubscription" class="btn-custom mg-t-0 left w-100" expand="block">
+              </ion-button>
+              <!-- <span>SUBSCRIBE -
+              {{ profile.subscriptionPrice.value | currency:profile.subscriptionPrice.currencyCode }}</span> -->
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <div class="disclaimer passive">
+              By subscribing, you accept the terms of service and you
+              will be billed upfront for the whole month. {{ profile?.name }}
+              owns the signals and 98% of the profits of this subscriptions
+              goes to his/her account.
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="profile.hasPurchasedSubscription">
+          <ion-col size="12">
+            <ion-button *ngIf="profile?.subscriptionId" appButtonSpinner (click)="unsubscribe()"
+              class="btn-custom mg-t-8 left w-100" [loadingState]="isPurchasingSubscription" expand="block">
+              UNSUBSCRIBE
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+
+
+      <ion-row *ngIf="false">
+        <ion-col>
+          <div class="title passive">People</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="false">
+        <ion-col>
+          <div class="signal-container mg-t-4 mg-b-4" *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11]">
+            <div class="user-info" [routerLink]="['/profile']" routerLinkActive="router-link-active">
+              <div class="left">
+                <span class="username">johnfitzgerald</span>&nbsp;<span class="company">@BlackRock</span>
+              </div>
+              <div class="right">
+                <div class="rating">
+                  <!-- <img src="../../assets/functional/icons8-star-filled.svg">
+              <img src="../../assets/functional/icons8-star-filled.svg">
+              <img src="../../assets/functional/icons8-star-filled.svg">
+              <img src="../../assets/functional/icons8-star-filled.svg">
+              <img src="../../assets/functional/icons8-star-half-empty.svg"> -->
+                  <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" activeColor="#488aff"
+                    defaultColor="#f4f4f4" readonly="true" [rating]="5" fontSize="18px">
+                  </ionic-rating-component>
+                </div>
+              </div>
+              <div class="left">
+                <div class="stats">Success rate: 210/250 - Accuracy: 96%</div>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </div>
+
+</ion-content>

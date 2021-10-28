@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">NOTIFICATIONS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="title passive">Buyer</div>
+  <div class="settings">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          New Signal
+          <div class="description passive">A new signal part of your subscription</div>
+        </ion-label>
+        <ion-toggle slot="start" name="blueberry" (ionChange)="save()" [(ngModel)]="notifications.newSignal" ></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          New Super Signal
+          <div class="description passive">A new super signal based on all my subscriptions</div>
+        </ion-label>
+        <ion-toggle slot="start" name="blueberry" (ionChange)="save()" [(ngModel)]="notifications.superSignal" ></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+  <div class="title passive">Seller</div>
+  <div class="settings">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          Signal sale
+          <div class="description passive">Receive a notification when you sold a single signal</div>
+        </ion-label>
+        <ion-toggle slot="start" name="blueberry" (ionChange)="save()" [(ngModel)]="notifications.signalSale" ></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          Subscription sale
+          <div class="description passive">Receive a notification when you sold a monthly subscription</div>
+        </ion-label>
+        <ion-toggle slot="start" name="blueberry" (ionChange)="save()" [(ngModel)]="notifications.subscriptionSale" ></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          Comment on your signal
+          <div class="description passive">Receive a notification when you sold a monthly subscription</div>
+        </ion-label>
+        <ion-toggle slot="start" name="blueberry" (ionChange)="save()" [(ngModel)]="notifications.signalComment" ></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/signals"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios" *ngIf="loading"><img src="../../assets/logo/logo.png" class="logo"></ion-title>
+    <ion-title mode="ios" *ngIf="!loading">{{ signal?.symbol }}</ion-title>
+
+    <ion-buttons slot="end">
+      <div class="favorite" (click)="favorite()" *ngIf="!loading && !signal?.isOwned">
+        <img [src]="favoriteUrl">
+      </div>
+      <div class="options" (click)="options()" *ngIf="!loading && signal?.isOwned">
+        <img src="../../assets/functional/icons8-menu-vertical.svg">
+      </div>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <div class="loading" *ngIf="loading">
+      <div class="visual-sm mg-t-32">
+        <img src="../../assets/visual/decision-gray.png">
+      </div>
+      <div class="label">Loading Signal...</div>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <div class="expired mg-b-16" *ngIf="!loading && signal?.hasExpired">
+      Expired
+    </div>
+
+    <div class="user-info" *ngIf="!loading">
+      <div class="right" style="text-align: right;">
+        <div class="profile-image"><img src="{{env.cdn}}profiles/{{ signal.userStats?.picture }}"></div>
+        <div class="rating" *ngIf="signal?.userStats?.rating && signal?.userStats?.rating > 0">
+          <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" activeColor="#488aff"
+            halfStar="true" defaultColor="#808c9f" readonly="true" [rating]="signal?.userStats?.rating" fontSize="18px">
+          </ionic-rating-component>
+        </div>
+      </div>
+
+      <div class="left" [routerLink]="['/profile', signal?.userId]" routerLinkActive="router-link-active">
+        <div class="username">{{ signal?.userStats?.username}}&nbsp;</div>
+        <div class="company">{{ signal?.userStats?.companyName }}</div>
+        <div class="stats passive">Success rate:
+          {{ signal?.userStats?.totalSuccesses }}/{{ signal?.userStats?.totalSignals }}</div>
+      </div>
+    </div>
+
+
+    <div class="symbol-info" *ngIf="!loading">
+      <div class="left">
+        <div class="symbol">{{ signal?.symbol }}</div>
+        <div class="exchange passive">{{ signal?.exchange }}</div>
+      </div>
+      <div class="right">
+        <div class="percentage">{{ signal?.potentialProfit }}%</div>
+        <div class="percentage-label passive">Potential</div>
+      </div>
+    </div>
+
+    <div class="general-stats" *ngIf="!loading">
+      <div class="left shared passive">Posted {{ signal?.createdOn | date: 'dd-MM-yyyy @ HH:mm:ss' }} UTC</div>
+      <div class="right ago upper passive">
+        <div><img src="../../../assets/functional/icons8-clock.svg"></div>
+        <div>{{ signal?.createdOn | timeAgo }}</div>
+      </div>
+      <div class="progress" appExpirationProgressBar [start]="signal.scheduleAt" [hasExpired]="signal.hasExpired"
+        [expiry]="signal.expiredOn">
+      </div>
+      <div class="left stats passive">PURCHASED {{ signal?.signalStats?.totalPurchased }} TIMES |
+        {{ signal?.signalStats?.totalComments }} COMMENTS |
+        {{ signal?.signalStats?.quality }}</div>
+    </div>
+
+    <div class="action" *ngIf="!loading && !signal?.isOwned && !signal?.hasExpired">
+      <ion-button [color]="signal?.isSelected ? 'warning' : 'primary'" class="btn-custom" (click)="toggleActivation()"
+        expand="block">
+        {{ signal?.isSelected ? 'UNSELECT' : 'SELECT' }}</ion-button>
+    </div>
+
+
+
+
+    <div class="time-container mg-t-32" *ngIf="!loading">
+      <div class="time">
+        <div class="icon mg-t-4"><img src="../../assets/functional/icons8-delivery-time.svg"></div>
+        <div class="label">
+          <div class="left mg-r-8">STARTS</div>
+          <div class="left">{{ signal?.scheduleAt | date: 'dd-MM-yyyy @ HH:mm:ss' }} UTC</div>
+          <div class="passive tx-12 mg-t-4">Started 3 hours ago</div>
+        </div>
+      </div>
+      <div class="time mg-t-8">
+        <div class="icon mg-t-4"><img src="../../assets/functional/icons8-sand-clock.svg"></div>
+        <div class="label">
+          <div class="left mg-r-8">ENDS</div>
+          <div class="left">{{ signal?.expiredOn | date: 'dd-MM-yyyy @ HH:mm:ss' }} UTC</div>
+          <div class="passive tx-12 mg-t-4">Will end in 4 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trade-container" *ngIf="!loading">
+      <div class="trade-data">
+        <div class="trade-info">
+          <div class="label passive">Stop Loss</div>
+          <div class="value mg-t-2">${{stopLoss}}</div>
+        </div>
+
+        <ng-container *ngIf="current > buy;">
+          <div class="trade-info">
+            <div class="label passive">Buy</div>
+            <div class="value mg-t-2">${{buy}}</div>
+          </div>
+          <div class="trade-info">
+            <div class="label passive">Current</div>
+            <div class="value mg-t-2">${{current}}</div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="current < buy;">
+          <div class="trade-info">
+            <div class="label passive">Buy</div>
+            <div class="value mg-t-2">${{buy}}</div>
+          </div>
+          <div class="trade-info">
+            <div class="label passive">Current</div>
+            <div class="value mg-t-2">${{current}}</div>
+          </div>
+        </ng-container>
+
+        <div class="trade-info">
+          <div class="label passive">Sell</div>
+          <div class="value mg-t-2">${{sell}}</div>
+        </div>
+      </div>
+      <div class="chart" *ngIf="!loading">
+        <app-BSSLChart [stopLoss]="stopLoss" [buyPrice]="buy" [sellPrice]="sell" [currentPrice]="current">
+        </app-BSSLChart>
+      </div>
+    </div>
+
+    <div class="documentation mg-b-8" *ngIf="!loading">
+      <div class="other-info" *ngIf="signal?.description">
+        {{ signal?.description }}
+      </div>
+
+      <ion-slides *ngIf="signal?.files" class="images">
+        <ion-slide *ngFor="let file of signal?.files">
+          <img src="{{env.cdn}}signals/{{ file?.hostedName }}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="rate" *ngIf="!loading && (!signal?.isOwned && !signal?.hasRated)">
+      <div class="title passive mg-t-8">Rate</div>
+      <div class="label passive">Rate this signal based on its performance</div>
+      <ionic-rating-component [readonly]="isRatingSubmitting ? 'true': 'false'" (ratingChanged)="onRatingChange($event)"
+        activeIcon="star" defaultIcon="star-outline" activeColor="#488aff" defaultColor="#808c9f" readonly="false"
+        [rating]="rating" fontSize="35px">
+      </ionic-rating-component>
+    </div>
+
+    <div class="comments mg-t-32" *ngIf="!loading">
+      <div class="title passive mg-b-8">Comments</div>
+      <div class="txt-message">
+        <ion-textarea rows="2" placeholder="Leave a comment" [(ngModel)]="comment.value" auto-grow="true">
+        </ion-textarea>
+      </div>
+      <ion-button class="btn-custom" appButtonSpinner (click)="leaveComment()" text="COMMENT" loadingText="SENDING..."
+        [loadingState]="isPostingComment" expand="block"></ion-button>
+
+      <div class="comment-container mg-t-4 mg-b-4" *ngFor="let comment of signal?.comments">
+        <div class="comment" [routerLink]="['/profile', comment?.userId]" routerLinkActive="router-link-active">
+          <div class="left">
+            <span class="username">{{ comment?.username }}&nbsp;</span>
+            <span *ngIf="comment?.companyId" class="company passive">@{{ comment?.companyName }}</span>
+          </div>
+          <div class="right">
+            <div class="time-ago passive">{{ comment?.createdOn | timeAgo }}</div>
+          </div>
+          <div class="left value mg-t-8">
+            {{ comment?.value }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty" *ngIf="empty">
+      <div class="image"><img src="../../assets/visual/comments-gray.png"></div>
+      <div class="label">No comments yet</div>
+      <div class="message">Be the first to leave a comment</div>
+    </div>
+
+  </div>
+</ion-content>

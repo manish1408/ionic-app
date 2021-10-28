@@ -1,0 +1,34 @@
+@import '../../theme/generic.scss';
+
+.container{margin:16px;}
+.search{margin-bottom:16px;}
+.search ion-input{font-size:14px;}
+.selectors ion-badge{margin:0 6px 6px 0;font-size:12px;padding:8px;}
+.btn-purchase{font-weight:700;font-size:14px;text-transform:uppercase;}
+.signal-container{float:left;width:100%;border:solid 1px #aaaaaa80;padding:6px 12px;border-radius:8px;margin-top:16px;}
+.user-info-top .username{float:left;width:100%;font-size:24px;font-weight:600;}
+.user-info-top .company{float:left;width:100%;font-size:16px;padding:4px 0 8px 0;}
+.user-info-top .stats{float:left;width:100%;font-size:12px;margin-top:4px;text-transform:uppercase;}
+.user-info-top .rating img{width:20px;}
+.user-info{float:left;width:100%;}
+.user-info .username{font-size:14px;font-weight:600;}
+.user-info .company{font-size:14px;}
+.user-info .stats{font-size:12px;margin-top:4px;text-transform:uppercase;}
+.bio{text-align:center;font-size:12px;margin:8px 0 16px 0;}
+.symbol-info{float:left;width:100%;margin-top:16px;}
+.symbol-info .symbol{font-weight:600;font-size:16px;}
+.symbol-info .exchange{text-transform:uppercase;font-size:12px;font-weight:500;}
+.symbol-info .percentage{font-weight:600;font-size:16px;text-align:right;}
+.symbol-info .percentage-label{text-transform:uppercase;font-size:12px;font-weight:500;text-align:right;}
+.payment{float:left;width:100%;margin-top:16px;}
+.payment .subscription{float:left;background-color:#dae2ea;color:#6d7d8b;text-transform:uppercase;font-size:12px;padding:2px 8px;border-radius:8px;font-weight:600;margin-top:6px;}
+.payment .subscription img{width:16px;}
+.payment .subscription div{float:left;margin:4px 2px 0 2px;}
+.general-stats{float:left;width:100%;margin-top:16px;}
+.general-stats .shared{text-transform:uppercase;font-size:12px;}
+.general-stats .ago{font-size:12px;text-align:right;}
+.general-stats .progress{float:left;width:100%;margin-top:8px;}
+.general-stats .stats{text-transform:uppercase;font-size:12px;margin-top:8px;}
+
+
+

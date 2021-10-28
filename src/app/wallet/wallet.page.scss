@@ -1,0 +1,15 @@
+@import '../../theme/generic.scss';
+
+.top {text-align: center;}
+.top .value { font-size: 28px; font-weight: 600;}
+.top .label { font-size: 14px; text-transform: uppercase;}
+
+.wallet {float: left; width: 100%; margin: 0 0; border:solid 2px #808c9f50; padding:10px 16px 0 16px; border-radius: 8px;}
+.wallet .image { float: left; width: 100%; text-align: center;}
+.wallet .image img {width: 60px;}
+.wallet .value {float: left; font-size: 18px; text-align: center; width: 100%;color:#2ebd85;}
+.wallet .address-label {float: left; width: 100%; text-align: center;font-size: 12px; font-weight: 600;text-transform: uppercase; margin:16px 0 0 0;}
+.wallet .address {float: left; width: 100%; text-align: center;font-size: 12px; font-weight: 600;text-transform: uppercase; margin:0 0 0 0;}
+.wallet .action {float: left; width: 100%; text-align: center;}
+.wallet .action {font-size: 14px; text-transform: uppercase; font-weight: 600;}
+.wallet .btn-custom {float: left; width: 100%;}

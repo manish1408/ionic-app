@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/help']" routerLinkActive="router-link-active">
+        HELP
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="ios">NOTIFICATIONS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doPullRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="crescent" refreshingText="">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="container">
+    <div class="notifications">
+      <div class="loading" *ngIf="loading">
+        <div class="visual-sm mg-t-32">
+          <img src="../../assets/visual/notification-gray.png">
+        </div>
+        <div class="label">Loading Notifications...</div>
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+      <div class="notification-container" *ngFor="let notification of notifications">
+        <div *ngIf="notification.type == 'NEW_SIGNAL'" (click)="nagivate(notification?.deepLink)">
+          <div class="type left passive">New Signal</div>
+          <div class="ago right passive">{{ notification?.createdOn | timeAgo }}</div>
+          <div class="main left clearl mg-r-8 mg-t-8">{{ notification?.payloadMain}}</div>
+          <div class="secondary passive left mg-t-8">@{{ notification?.payloadSecondary}}</div>
+          <div class="value clearl left mg-t-8">{{ notification?.payloadValue}}</div>
+        </div>
+        <div *ngIf="notification.type == 'SUBSCRIPTION_SALE'" (click)="nagivate(notification?.deepLink)">
+          <div class="type left passive">Subscription Sale</div>
+          <div class="ago right passive">{{ notification?.createdOn | timeAgo }}</div>
+          <div class="main left clearl mg-r-8 mg-t-8">{{ notification?.payloadMain}}</div>
+          <div class="value clearl left mg-t-8">{{ notification?.payloadValue}}</div>
+        </div>
+        <div *ngIf="notification.type == 'SIGNAL_SALE'" (click)="nagivate(notification?.deepLink)">
+          <div class="type left passive">Signal Sale</div>
+          <div class="ago right passive">{{ notification?.createdOn | timeAgo }}</div>
+          <div class="main left clearl mg-r-8 mg-t-8">{{ notification?.payloadMain}}</div>
+          <div class="value clearl left mg-t-8">{{ notification?.payloadValue}}</div>
+        </div>
+        <div *ngIf="notification.type == 'NEW_SIGNAL_COMMENT'" (click)="nagivate(notification?.deepLink)">
+          <div class="type left passive">Signal Comment</div>
+          <div class="ago right passive">{{ notification?.createdOn | timeAgo }}</div>
+          <div class="main left clearl mg-r-8 mg-t-8">{{ notification?.payloadMain}}</div>
+          <div class="secondary passive left mg-t-8">@{{ notification?.payloadSecondary}}</div>
+          <div class="value clearl left mg-t-8">{{ notification?.payloadValue}}</div>
+        </div>
+        <div *ngIf="notification.type == 'NEW_PROFILE_COMMENT'" (click)="nagivate(notification?.deepLink)">
+          <div class="type left passive">Profile Comment</div>
+          <div class="ago right passive">{{ notification?.createdOn | timeAgo }}</div>
+          <div class="main left clearl mg-r-8 mg-t-8">{{ notification?.payloadMain}}</div>
+          <div class="secondary passive left mg-t-8">@{{ notification?.payloadSecondary}}</div>
+          <div class="value clearl left mg-t-8">{{ notification?.payloadValue}}</div>
+        </div>
+      </div>
+      <div class="empty" *ngIf="notifications && notifications.length < 1">
+        <div class="image"><img src="../../assets/visual/empty-gray.png"></div>
+        <div class="label">No notifications yet</div>
+        <div class="message">You will see notifications when you<br>start buying or selling signals</div>
+      </div>
+
+      <ion-infinite-scroll *ngIf="!loading && notifications && notifications.length > 0" threshold="100px"
+        (ionInfinite)="load(true, $event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+    </div>
+  </div>
+</ion-content>

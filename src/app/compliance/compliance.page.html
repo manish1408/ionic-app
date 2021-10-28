@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">COMPLIANCE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+
+    <div class="description passive">
+      Signalled need to adhere to all the compliance laws when you're selling signals.
+      Please upload a document and a photo.
+    </div>
+
+    <div class="status-container">
+      <div class="status">Status: {{compliance?.statusLabel}}</div>
+    </div>
+
+    <div class="mg-b-16 mg-t-16" *ngIf="compliance?.status != 2 && compliance?.status != 3">
+      <ion-item class="selection">
+        <ion-label class="placeholder" *ngIf="!compliance.documentType">Select document</ion-label>
+        <ion-select [(ngModel)]="compliance.documentType" interface="action-sheet"
+          [ngClass]="{'selection-selected' : compliance.documentType}">
+          <ion-select-option value="driving_licence">Driving Licence</ion-select-option>
+          <ion-select-option value="id">Identity Card</ion-select-option>
+          <ion-select-option value="passport">Passport</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="upload-container">
+      <label class="hoverable" *ngIf="!compliance?.document" for="fileInput">
+        <input id="fileInput" type='file' (change)="onDocumentSelectFile($event)"
+          *ngIf="compliance?.status != 2 || compliance?.status != 3">
+        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+          <path
+            d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z M 8 12 L 8 14 L 10 14 L 10 12 L 8 12 z M 11 12 L 11 14 L 16 14 L 16 12 L 11 12 z M 8 16 L 8 18 L 13 18 L 13 16 L 8 16 z M 14 16 L 14 18 L 16 18 L 16 16 L 14 16 z" />
+        </svg>
+        <div class="label mg-t-4" *ngIf="!compliance.documentFilename">Upload a document</div>
+        <div class="filename mg-t-4" *ngIf="compliance.documentFilename">{{compliance.documentFilename}}1</div>
+        <ion-button *ngIf="compliance.documentFilename" (click)="removeDocument()" class="btn-custom btn-small">REMOVE
+        </ion-button>
+      </label>
+      <div *ngIf="compliance?.document" class="user-doc-ctrl">
+        <div class="uploaded-container" *ngIf="documentUrl"><img class="uploaded-image" [src]="documentUrl"></div>
+        <div class="filename mg-t-4" *ngIf="compliance?.document">{{compliance?.document}}</div>
+        <ion-button (click)="deleteDocument()" class="btn-custom btn-small"
+          *ngIf="compliance?.status != 2 && compliance?.status != 3">DELETE</ion-button>
+      </div>
+    </div>
+
+    <div class="upload-container mg-t-16">
+      <label class="hoverable" *ngIf="!compliance.photo" for="fileInput2">
+        <input id="fileInput2" type='file' (change)="onPhotoSelectFile($event)"
+          *ngIf="compliance?.status != 2 || compliance?.status != 3">
+        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+          <path
+            d="M 3 3 L 3 7 L 5 7 L 5 5 L 7 5 L 7 3 L 3 3 z M 17 3 L 17 5 L 19 5 L 19 7 L 21 7 L 21 3 L 17 3 z M 12 5 C 10.35503 5 9 6.3550302 9 8 C 9 9.6449698 10.35503 11 12 11 C 13.64497 11 15 9.6449698 15 8 C 15 6.3550302 13.64497 5 12 5 z M 12 7 C 12.56503 7 13 7.4349698 13 8 C 13 8.5650302 12.56503 9 12 9 C 11.43497 9 11 8.5650302 11 8 C 11 7.4349698 11.43497 7 12 7 z M 12 12 C 10.331 12 7 12.837 7 14.5 L 7 17 L 17 17 L 17 14.5 C 17 12.837 13.669 12 12 12 z M 12 14 C 13.06 14 14.506 14.433922 15 14.794922 L 15 15 L 9 15 L 9 14.794922 C 9.494 14.433922 10.94 14 12 14 z M 3 17 L 3 21 L 7 21 L 7 19 L 5 19 L 5 17 L 3 17 z M 19 17 L 19 19 L 17 19 L 17 21 L 21 21 L 21 17 L 19 17 z" />
+        </svg>
+        <div class="label mg-t-4" *ngIf="!compliance.photoFilename">Upload a photo of yourself</div>
+        <div class="filename mg-t-4" *ngIf="compliance.photoFilename">{{compliance.photoFilename}}</div>
+        <ion-button *ngIf="compliance.photoFilename" (click)="removePhoto()" class="btn-custom btn-small">REMOVE
+        </ion-button>
+      </label>
+      <div *ngIf="compliance.photo" class="user-image-ctrl">
+        <div class="uploaded-container" *ngIf="photoUrl"><img class="uploaded-image" [src]="photoUrl"></div>
+        <div class="filename mg-t-4" *ngIf="compliance?.photo">{{compliance?.photo}}</div>
+        <ion-button (click)="deletePhoto()" class="btn-custom btn-small"
+          *ngIf="compliance?.status != 2 && compliance?.status != 3">DELETE</ion-button>
+      </div>
+    </div>
+
+    <ion-button class="btn-custom mg-t-16" [disabled]="loading" expand="block" (click)="save()"
+      *ngIf="compliance?.status != 2 && compliance?.status != 3">
+      <span *ngIf="!loading">SAVE</span>
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+
+  </div>
+</ion-content>

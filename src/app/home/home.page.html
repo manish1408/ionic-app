@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title mode="ios">
+      <img src="../../assets/logo/logo.png" class="logo">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="crescent" refreshingText="">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="container">
+
+    <ion-slides *ngIf="false">
+      <ion-slide>
+        <img src="../../assets/creative/transparent.png">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/creative/monitor.png">
+      </ion-slide>
+    </ion-slides>
+
+    <div class="title">
+      Hello Mac, check what's new today.
+    </div>
+
+    <div class="description passive">
+      Get started with Signalled. Check signals based on your exchange of choice and find amazing opportunities.
+    </div>
+
+    <div class="stats mg-t-16">
+      <div class="stat">
+        <div class="value">{{homeStats.newSignals}}</div>
+        <div class="label passive">New<br>Signals</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{homeStats.superSignal}}</div>
+        <div class="label passive">Super<br>Signal</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{homeStats.newTraders}}</div>
+        <div class="label passive">New<br>Traders</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{homeStats.signalsMonitored}}</div>
+        <div class="label passive">Signals<br>Monitored</div>
+      </div>
+    </div>
+
+    <div class="visual mg-t-32">
+      <img src="../../assets/visual/sell-black.png" *ngIf="!isDark">
+      <img src="../../assets/visual/sell-white.png" *ngIf="isDark">
+    </div>
+
+    <div class="title">
+      Make money by selling signals
+    </div>
+    <div class="description passive">
+      Sell an awesome signal or subscription and start building your reputation.
+    </div>
+
+    <div class="stats" *ngIf="showSellStats && (homeStats.signalsSold > 0  || homeStats.subscriptionsSold > 0)">
+      <div class="stat">
+        <div class="value">{{homeStats.signalsSold}}</div>
+        <div class="label passive">Signals<br>Sold</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{homeStats.subscriptionsSold}}</div>
+        <div class="label passive">Subscriptions<br>Sold</div>
+      </div>
+      <div class="stat">
+        <div class="value">{{homeStats.hits}}/{{homeStats.misses}}</div>
+        <div class="label passive">Hits/Misses</div>
+      </div>
+    </div>
+
+    <ion-button class="btn-custom" expand="block" [routerLink]="['/sell']" routerLinkActive="router-link-active">
+      <span>SELL A SIGNAL</span>
+    </ion-button>
+
+
+    <div class="visual mg-t-32">
+      <img src="../../assets/visual/network-black.png" *ngIf="!isDark">
+      <img src="../../assets/visual/network-white.png" *ngIf="isDark">
+    </div>
+
+    <section>
+      <div class="title">
+        Invite a friend and earn
+      </div>
+      <div class="description passive">
+        Invite a friend and earn $5 for every user you bring.*
+      </div>
+      <div class="input-text mg-t-4 mg-b-16">
+        <ion-input type="email" placeholder="Enter email address" [(ngModel)]="inviteEmail">
+        </ion-input>
+      </div>
+      <ion-button class="btn-custom" type="submit" expand="block">
+        <span>INVITE</span>
+      </ion-button>
+    </section>
+
+  </div>
+</ion-content>

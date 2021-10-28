@@ -1,0 +1,6 @@
+@import '../../theme/generic.scss';
+.container{margin:16px;}
+.container p{font-size:14px;}
+.container .toggle{display:flex;padding-top:16px;}
+.container .toggle ion-toggle{min-width:50px;padding-right:8px;}
+.container .toggle .value{font-size:14px;}

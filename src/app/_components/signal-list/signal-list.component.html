@@ -1,0 +1,90 @@
+   <div class="signal-container" [ngClass]="{'signal-container-expired': signal?.hasExpired}"
+     *ngFor="let signal of signals">
+     <div class="user-info" [routerLink]="['/signal', signal.id]" routerLinkActive="router-link-active">
+
+       <div class="right" style="text-align: right;">
+         <div class="profile-image"><img src="{{env.cdn}}profiles/{{ signal.userStats?.picture }}"></div>
+         <div class="rating" *ngIf="signal.signalStats?.rating > 0">
+           <ionic-rating-component #rating activeIcon="star" defaultIcon="star-outline" activeColor="#488aff"
+             defaultColor="#808c9f" readonly="true" halfStar="true" [rating]="signal.signalStats?.rating > 0 ?
+            signal.signalStats?.rating : -1" fontSize="16px">
+           </ionic-rating-component>
+         </div>
+       </div>
+       <div class="left">
+         <div class="username ">{{ signal?.userStats?.username }}</div>
+         <div class="company">{{ signal?.userStats?.companyName }}</div>
+         <div class="stats passive">Success rate:
+           {{ signal?.userStats?.totalSuccesses }}/{{ signal?.userStats?.totalSignals }}
+         </div>
+       </div>
+     </div>
+
+     <div class="symbol-info" [routerLink]="['/signal', signal.id]">
+       <div class="left">
+         <div class="symbol">{{ signal?.symbol }}</div>
+         <div class="exchange passive">{{ signal?.exchange }}</div>
+       </div>
+       <div class="right">
+         <div class="percentage">{{ signal?.potentialProfit }}%</div>
+         <div class="percentage-label passive">Potential</div>
+       </div>
+     </div>
+     <div class="payment" [routerLink]="['/signal', signal.id]">
+       <div class="left">
+         <div class="subscription">
+           <div *ngIf="!signal?.hasPurchased && !signal?.isOwned"><img src="../../assets/functional/icons8-lock.svg">
+           </div>
+           <div *ngIf="signal?.hasPurchased;"><img src="../../assets/functional/icons8-checkmark.svg"></div>
+           <div *ngIf="signal?.isOwned"><img src="../../assets/functional/icons8-checkmark.svg"></div>
+           <ng-container *ngIf="!signal?.isOwned; else ownedSection">
+             <ng-container *ngIf="signal?.isFree; else pricing">
+               <div>FREE</div>
+             </ng-container>
+             <ng-template #pricing>
+               <ng-container *ngIf="signal?.hasPurchased;else signalPrice;">
+                 <div>Purchased</div>
+               </ng-container>
+               <ng-template #signalPrice>
+                 <div> {{ signal?.price?.value | currency:signal?.price?.currecyCode }}
+                   <span *ngIf="signal?.isPartOfSubscription">
+                     or SUBSCRIBE
+                     {{ getSubscriptionPrice(signal, 'Monthly')?.value |  currency:getSubscriptionPrice(signal, 'Monthly')?.currecyCode}}
+                   </span>
+                 </div>
+               </ng-template>
+             </ng-template>
+           </ng-container>
+
+           <ng-template #ownedSection>
+             <div>OWNED</div>
+           </ng-template>
+         </div>
+       </div>
+       <div class="right">
+         <div class="status">
+           <div class="expired" *ngIf="signal?.hasExpired">
+             Expired
+           </div>
+         </div>
+         <div *ngIf="signal.isSelected" class="selected"></div>
+       </div>
+     </div>
+
+     <div class="general-stats" [routerLink]="['/signal', signal.id]">
+       <div class="left shared upper passive">
+         {{ signal?.scheduleAt | duration: signal?.hasExpired }}
+       </div>
+       <div class="right ago upper passive">
+         <div><img src="../../../assets/functional/icons8-clock.svg"></div>
+         <div>{{ signal?.createdOn | timeAgo }}</div>
+       </div>
+       <div class="progress" appExpirationProgressBar [start]="signal.scheduleAt" [hasExpired]="signal.hasExpired"
+         [expiry]="signal.expiredOn">
+       </div>
+       <div class="left stats passive">PURCHASED {{ signal?.signalStats?.totalPurchased }} TIMES |
+         {{ signal?.signalStats?.totalComments }} COMMENTS  <span *ngIf="signal?.signalStats?.quality">|</span>
+         {{ signal?.signalStats?.quality }}</div>
+     </div>
+
+   </div>
